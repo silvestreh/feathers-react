@@ -1,6 +1,6 @@
 {
   "name": "feathers-react",
-  "version": "1.0.1",
+  "version": "0.0.0",
   "description": "A feathers-aware component",
   "author": "silvestreh",
   "license": "MIT",
@@ -21,9 +21,9 @@
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
     "prepublish": "git push origin --tags",
-    "release:patch": "npm version patch && npm run publish",
-    "release:minor": "npm version minor && npm run publish",
-    "release:major": "npm version major && npm run publish"
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "jest": {
     "collectCoverageFrom": [
