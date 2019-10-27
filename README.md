@@ -1,4 +1,4 @@
-# feathers-react
+# feathers-react [![CircleCI](https://circleci.com/gh/silvestreh/feathers-react.svg?style=svg)](https://circleci.com/gh/silvestreh/feathers-react)
 
 > A [Feathers](https://www.feathersjs.com) real-time React component library to display data
 
