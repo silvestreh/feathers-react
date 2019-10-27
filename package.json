@@ -18,12 +18,9 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build",
-    "prepublish": "git push origin --tags",
-    "release:patch": "npm version patch && npm publish",
-    "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish"
+    "release:patch": "npm version patch && git push origin --tags && npm publish",
+    "release:minor": "npm version minor && git push origin --tags && npm publish",
+    "release:major": "npm version major && git push origin --tags && npm publish"
   },
   "jest": {
     "collectCoverageFrom": [
