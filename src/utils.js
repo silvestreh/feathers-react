@@ -1,0 +1,22 @@
+export const allowedOperators = [
+  '$in',
+  '$nin',
+  '$exists',
+  '$gte',
+  '$gt',
+  '$lte',
+  '$lt',
+  '$eq',
+  '$ne',
+  '$mod',
+  '$all',
+  '$and',
+  '$or',
+  '$nor',
+  '$not',
+  '$size',
+  '$type',
+  '$regex',
+  '$where',
+  '$elemMatch'
+];

@@ -1,0 +1,6 @@
+src/
+.babelrc
+.eslintrc
+.gitignore
+.travis.yml
+rollup.config.js

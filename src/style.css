@@ -1,0 +1,153 @@
+.rc-pagination {
+  align-items: center;
+  display: flex;
+  line-height: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rc-pagination-item {
+  display: block;
+  margin: 0 .25em;
+}
+
+.rc-pagination-item a {
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, .05);
+  border-radius: .25em;
+  color: #455A64;
+  cursor: pointer;
+  display: inline-flex;
+  height: 2em;
+  justify-content: center;
+  outline: none;
+  width: 2em;
+}
+
+.rc-pagination-item-active a {
+  background: rgba(75, 77, 241, 1);
+  color: white;
+}
+
+.rc-pagination-disabled .fr-pagination-icon {
+  cursor: not-allowed;
+  opacity: .25;
+}
+
+.rc-pagination-total-text {
+  font-size: .85em;
+  margin-right: auto;
+  opacity: .5;
+}
+
+.rc-pagination-total-text:empty {
+  display: none;
+}
+
+.fr-pagination-icon {
+  cursor: pointer;
+  opacity: .5;
+}
+
+.fr-table-wrapper {
+  border-radius: .25em;
+  box-shadow:
+    0 0.125em 0.25em rgba(0, 0, 0, 0.125),
+    0 1em 2em rgba(75, 77, 241, 0.1);
+  color: #545466;
+  overflow: hidden;
+  position: relative;
+}
+
+.fr-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.fr-table-head {
+  background: #FCFCFF;
+  border-bottom: 1px solid rgba(0, 0, 0, .025);
+}
+
+.fr-table-head .fr-table-content {
+  color: rgba(0, 0, 0, .5);
+  font-weight: 400;
+}
+
+.fr-table-column-title {
+  font-size: .85em;
+}
+
+.fr-table-content {
+  font-size: .85em;
+  line-height: 1.5;
+  padding: 1em;
+  text-align: left;
+}
+
+.fr-table-body {
+  background: white;
+}
+
+.fr-table-row + .fr-table-row {
+  border-top: 1px solid rgba(0, 0, 0, .025);
+}
+
+.fr-table-row-clickable {
+  transition: background-color, 350ms;
+}
+
+.fr-table-row-clickable:hover {
+  background-color: rgba(75, 77, 241, .05);
+  cursor: pointer;
+}
+
+.fr-table-footer .fr-table-content {
+  background: #FCFCFF;
+  box-shadow:
+    inset 0 .25em .25em -.25em rgba(0, 0, 0, .05),
+    inset 0 1em 1em -1em rgba(75, 77, 241, .05);
+  text-align: right;
+}
+
+.fr-table-no-data {
+  padding: 2em;
+  text-align: center;
+}
+
+.fr-table-no-data img {
+  display: block;
+  height: 3em;
+  margin: 0 auto 1em;
+  opacity: .5;
+}
+
+.fr-table-loading {
+  align-items: center;
+  background: rgba(255, 255, 255, .85);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fr-table-loading::after {
+  animation: spin .5s linear infinite;
+  border: .125em solid rgba(75, 77, 241, 1);
+  border-radius: 50%;
+  border-top-color: transparent;
+  content: '';
+  display: block;
+  height: 1.5em;
+  width: 1.5em;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
