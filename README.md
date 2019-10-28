@@ -18,14 +18,14 @@ npm install --save feathers-react
 
 | Name | Description | Required | Default value |
 |------|-------------|----------|---------------|
-| `service` | The Feathers service to get data from. | Yes | `null` |
+| `service` | The Feathers service to get data from. | Yes | `undefined` |
 | `query` | A [Feathers query](https://docs.feathersjs.com/api/databases/querying.html) object to run against the specified `service`. | No | `{}` |
-| `keyProp` | The result's property to use as `key`. | Yes | `'id'` |
+| `keyProp` | The result's property to use as `key`. | No | `'id'` |
 | `onRowClick` | Click event handler for a table row. The function takes two arguments: the row's data and its `index`. | No | `(row, index) => {}` |
-| `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `null` |
+| `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
-| `usePagination` | Determines wether to use the `<Pagination />` component. | No | `false` |
-| `paginationProps` | An `Object` to override [`rc-pagination`](https://github.com/react-component/pagination)'s props. | No | `null` |
+| `usePagination` | Determines wether to use the `<Pagination />` component. | No | `true` |
+| `paginationProps` | An `Object` to override [`rc-pagination`](https://github.com/react-component/pagination)'s props. | No | `undefined` |
 
 ### Column props
 
@@ -33,10 +33,10 @@ npm install --save feathers-react
 
 | Name | Description | Required | Default value |
 |------|-------------|----------|---------------|
-| `dataSource` | The result's property to extract data from. | Yes | `null` |
-| `render` | A render function that takes two arguments: the data for the column and the row's data. For example, `imageUrl => <img src={imageUrl} />` would render an image in the table cell. | No | `null` |
-| `title` | A string to use as the header for the column. | No | `null` |
-| `width` | The column's visual width, in pixels. | No | `null` |
+| `dataSource` | The result's property to extract data from. | Yes | `undefined` |
+| `render` | A render function that takes two arguments: the data for the column and the row's data. For example, `imageUrl => <img src={imageUrl} />` would render an image in the table cell. | No | `undefined` |
+| `title` | A string to use as the header for the column. | No | `undefined` |
+| `width` | The column's visual width, in pixels. | No | `undefined` |
 
 ### Example
 
@@ -45,6 +45,7 @@ In this simple example, the `<Table />` component takes a `client` prop which is
 ```jsx
 import React from 'react';
 import { Column, Table } from 'feathers-react';
+import 'feathers-react/style.css';
 
 export default ({ client }) => {
   const service = client.service('some-service');
@@ -72,20 +73,21 @@ The `<Container />` component is a generic wrapper that you can use to present d
 
 | Name | Description | Required | Default value |
 |------|-------------|----------|---------------|
-| `service` | The Feathers service to get data from. | Yes | `null` |
+| `service` | The Feathers service to get data from. | Yes | `undefined` |
 | `query` | A [Feathers query](https://docs.feathersjs.com/api/databases/querying.html) object to run against the specified `service`. | No | `{}` |
-| `keyProp` | The result's property to use as `key`. | Yes | `'id'` |
-| `renderItem` | A render function that can return a React component. The function takes two arguments: the row's data and its `index`. | No | `(row, index) => <SomeComponent key={row.id} data={row} />` |
-| `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `null` |
+| `keyProp` | The result's property to use as `key`. | No | `'id'` |
+| `renderItem` | A render function that can return a React component. The function takes two arguments: the row's data and its `index`. | Yes | `(row, index) => <SomeComponent key={row.id} data={row} />` |
+| `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
 | `usePagination` | Determines wether to use the `<Pagination />` component. | No | `false` |
-| `paginationProps` | An `Object` to override [`rc-pagination`](https://github.com/react-component/pagination)'s props. | No | `null` |
+| `paginationProps` | An `Object` to override [`rc-pagination`](https://github.com/react-component/pagination)'s props. | No | `undefined` |
 
 ### Example
 
 ```jsx
 import React from 'react';
 import { Container } from 'feathers-react';
+import 'feathers-react/style.css';
 import SomeComponent from './some-component';
 
 export default ({ client }) => {
