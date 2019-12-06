@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { cloneElement, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Base from '../base';
 import Pagination from '../pagination';
 
 class FeathersContainer extends Base {
   static propTypes = {
+    itemsWrapper: PropTypes.node,
     paginationProps: PropTypes.object,
     renderItem: PropTypes.func.isRequired,
     usePagination: PropTypes.bool
@@ -15,12 +16,13 @@ class FeathersContainer extends Base {
   };
 
   render () {
-    const { renderItem, usePagination, language, paginationProps, countTemplate } = this.props;
+    const { countTemplate, itemsWrapper, language, paginationProps, renderItem, usePagination  } = this.props;
     const { data, pagination } = this.state;
 
     return (
       <Fragment>
-        {data.map(renderItem)}
+        {itemsWrapper && cloneElement(itemsWrapper, { children: data.map(renderItem) })}
+        {!itemsWrapper && data.map(renderItem)}
         {usePagination && !!data.length &&
           <Pagination
             onChange={this.pageChange}
