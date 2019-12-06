@@ -124,7 +124,10 @@ class FeathersReact extends Component {
 
     if (filter(created)) {
       data.unshift(created);
-      data.pop();
+
+      if (data.length > pagination.pageSize) {
+        data.pop();
+      }
     }
 
     if (pagination) {
