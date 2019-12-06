@@ -44,6 +44,21 @@ describe('<Container /> Component', () => {
     done();
   });
 
+  it('supports having a wrapper', async () => {
+    const wrapper = mount(
+      <Component
+        itemsWrapper={<div className="wrapper-div" />}
+        service={service}
+        renderItem={(record, i) => <p key={i}>{record.text}</p>}>
+      </Component>
+    );
+    await wrapper.instance().find();
+    wrapper.update();
+    const itemsWrapper = wrapper.find('.wrapper-div');
+    expect(itemsWrapper).toHaveLength(1);
+    expect(itemsWrapper.props().children).toHaveLength(10);
+  });
+
   it('removes listeners on unmount', () => {
     const spy = jest.spyOn(instance.props.service, 'removeListener');
     instance.componentWillUnmount();
