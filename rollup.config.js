@@ -30,10 +30,7 @@ export default {
     }),
     url(),
     svgr(),
-    babel({
-      exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
-    }),
+    babel({ exclude: 'node_modules/**' }),
     resolve(),
     commonjs(),
     copy({
