@@ -81,6 +81,7 @@ The `<Container />` component is a generic wrapper that you can use to present d
 | `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
 | `usePagination` | Determines wether to use the `<Pagination />` component. | No | `false` |
+| `hidePaginationOnSinglePage` | Hides the pagination component when there's only one page of data | No | `undefined` |
 | `paginationProps` | An `Object` to override [`rc-pagination`](https://github.com/react-component/pagination)'s props. | No | `undefined` |
 
 ### Example
