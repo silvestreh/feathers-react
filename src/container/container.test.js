@@ -40,7 +40,6 @@ describe('<Container /> Component', () => {
     await wrapper.instance().find();
     wrapper.update();
     expect(wrapper.find('.rc-pagination-total-text').text()).toBe('Showing 1 to 10 of 15');
-    expect(wrapper.find('.fr-table-row-clickable')).not.toHaveLength();
     done();
   });
 

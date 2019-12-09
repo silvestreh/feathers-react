@@ -5,6 +5,7 @@ import Pagination from '../pagination';
 
 class FeathersContainer extends Base {
   static propTypes = {
+    hidePaginationOnSinglePage: PropTypes.bool,
     itemsWrapper: PropTypes.node,
     paginationProps: PropTypes.object,
     renderItem: PropTypes.func.isRequired,
@@ -16,14 +17,15 @@ class FeathersContainer extends Base {
   };
 
   render () {
-    const { countTemplate, itemsWrapper, language, paginationProps, renderItem, usePagination  } = this.props;
+    const { countTemplate, hidePaginationOnSinglePage, itemsWrapper, language, paginationProps, renderItem, usePagination  } = this.props;
     const { data, pagination } = this.state;
+    const shouldShowPagination = hidePaginationOnSinglePage && pagination ? data.length >= pagination.pageSize : !!data.length;
 
     return (
       <Fragment>
         {itemsWrapper && cloneElement(itemsWrapper, { children: data.map(renderItem) })}
         {!itemsWrapper && data.map(renderItem)}
-        {usePagination && !!data.length &&
+        {usePagination && shouldShowPagination &&
           <Pagination
             onChange={this.pageChange}
             language={language}
