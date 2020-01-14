@@ -115,6 +115,7 @@ class FeathersReact extends Component {
   handleCreate = created => {
     const { query } = this.props;
     const { data, pagination } = this.state;
+    const shouldUpdate = this.isRecordInData(created);
     const keys = Object.keys(query)
       .filter(key => (
         key.includes('$') && !allowedOperators.includes(key)
@@ -122,7 +123,7 @@ class FeathersReact extends Component {
     const filter = sift(omit(query, ...keys));
     let p = null;
 
-    if (filter(created)) {
+    if (filter(created) && !shouldUpdate.isInData) {
       data.unshift(created);
 
       if (data.length > pagination.pageSize) {
