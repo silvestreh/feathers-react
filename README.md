@@ -75,6 +75,7 @@ The `<Container />` component is a generic wrapper that you can use to present d
 |------|-------------|----------|---------------|
 | `service` | The Feathers service to get data from. | Yes | `undefined` |
 | `query` | A [Feathers query](https://docs.feathersjs.com/api/databases/querying.html) object to run against the specified `service`. | No | `{}` |
+| `emptyState` | An HTMLElement, React component, or String to render when there are no results. | No | `undefined` |
 | `keyProp` | The result's property to use as `key`. | No | `'id'` |
 | `renderItem` | A render function that can return a React component. The function takes two arguments: the row's data and its `index`. | Yes | `(row, index) => <SomeComponent key={row.id} data={row} />` |
 | `itemsWrapper` | An HTMLElement or React component that will wrap rendered children. | No | `undefined` |

@@ -13,14 +13,16 @@
     "npm": ">=5"
   },
   "scripts": {
+    "pretest": "npm run lint",
     "test": "cross-env CI=1 react-scripts test --env=jsdom --coverage",
     "test:watch": "react-scripts test --env=jsdom --coverage --watch",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
-    "release:patch": "npm version patch && git push origin --tags && npm publish",
-    "release:minor": "npm version minor && git push origin --tags && npm publish",
-    "release:major": "npm version major && git push origin --tags && npm publish"
+    "release:patch": "npm test && npm version patch && git push origin --tags && npm publish",
+    "release:minor": "npm test && npm version minor && git push origin --tags && npm publish",
+    "release:major": "npm test && npm version major && git push origin --tags && npm publish",
+    "lint": "semistandard --fix"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -37,6 +39,14 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
+  "semistandard": {
+    "parser": "babel-eslint",
+    "env": {
+      "es2017": true,
+      "es6": true,
+      "jest": true
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
@@ -49,12 +59,13 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
+    "eslint-config-semistandard": "^15.0.0",
+    "eslint-config-semistandard-react": "^4.2.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-semistandard-react": "^4.1.0",
     "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
     "lodash.times": "^4.3.2",
@@ -68,7 +79,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-url": "^3.0.1"
+    "rollup-plugin-url": "^3.0.1",
+    "semistandard": "^14.2.0"
   },
   "files": [
     "dist"
