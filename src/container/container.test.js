@@ -10,11 +10,12 @@ describe('<Container /> Component', () => {
     const query = { $sort: { text: 1 } };
     service = app.service('messages');
     wrapper = mount(
-      <Component usePagination
+      <Component
+        usePagination
         service={service}
         query={query}
-        renderItem={(record, i) => <p key={i}>{record.text}</p>}>
-      </Component>
+        renderItem={(record, i) => <p key={i}>{record.text}</p>}
+      />
     );
     instance = wrapper.instance();
   });
@@ -22,7 +23,7 @@ describe('<Container /> Component', () => {
   it('renders data using a render function', async done => {
     expect(wrapper.find('p')).toHaveLength(0);
     await instance.find();
-    wrapper.update()
+    wrapper.update();
     expect(wrapper.find('p')).toHaveLength(10);
     done();
   });
@@ -34,8 +35,8 @@ describe('<Container /> Component', () => {
         usePagination
         countTemplate={template}
         service={service}
-        renderItem={(record, i) => <p key={i}>{record.text}</p>}>
-      </Component>
+        renderItem={(record, i) => <p key={i}>{record.text}</p>}
+      />
     );
     await wrapper.instance().find();
     wrapper.update();
@@ -46,10 +47,10 @@ describe('<Container /> Component', () => {
   it('supports having a wrapper', async () => {
     const wrapper = mount(
       <Component
-        itemsWrapper={<div className="wrapper-div" />}
+        itemsWrapper={<div className='wrapper-div' />}
         service={service}
-        renderItem={(record, i) => <p key={i}>{record.text}</p>}>
-      </Component>
+        renderItem={(record, i) => <p key={i}>{record.text}</p>}
+      />
     );
     await wrapper.instance().find();
     wrapper.update();

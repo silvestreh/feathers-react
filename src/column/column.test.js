@@ -6,8 +6,9 @@ describe('<Column />', () => {
   it('displays data from row', () => {
     const wrapper = shallow(
       <Component
-        dataSource="text"
-        row={{ id: 1, text: 'Testing' }} />
+        dataSource='text'
+        row={{ id: 1, text: 'Testing' }}
+      />
     );
 
     expect(wrapper.text()).toBe('Testing');
@@ -17,9 +18,10 @@ describe('<Column />', () => {
     const url = 'http://path.com/to/image.png';
     const wrapper = shallow(
       <Component
-        dataSource="url"
+        dataSource='url'
         row={{ id: 1, url }}
-        render={data => <img src={data} />} />
+        render={data => <img src={data} />}
+      />
     );
 
     expect(wrapper.find('img')).toHaveLength(1);

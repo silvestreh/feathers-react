@@ -15,9 +15,10 @@ describe('<Table /> Component', () => {
       <Component
         service={service}
         query={query}
-        onRowClick={onRowClick}>
-        <Column title="ID" dataSource="id" />
-        <Column title="Text" dataSource="text" />
+        onRowClick={onRowClick}
+      >
+        <Column title='ID' dataSource='id' />
+        <Column title='Text' dataSource='text' />
       </Component>
     );
     instance = wrapper.instance();
@@ -26,7 +27,7 @@ describe('<Table /> Component', () => {
   it('calls service find', async done => {
     expect(wrapper.find('Column')).toHaveLength(0);
     await instance.find();
-    wrapper.update()
+    wrapper.update();
     expect(wrapper.find('Column')).toHaveLength(20);
     done();
   });
@@ -34,8 +35,8 @@ describe('<Table /> Component', () => {
   it('works with an unpagianted response', async done => {
     const wrapper = mount(
       <Component service={app.service('not-paginated')}>
-        <Column title="ID" dataSource="id" />
-        <Column title="Text" dataSource="text" />
+        <Column title='ID' dataSource='id' />
+        <Column title='Text' dataSource='text' />
       </Component>
     );
     await wrapper.instance().find();
@@ -79,7 +80,7 @@ describe('<Table /> Component', () => {
     const spy = jest.spyOn(instance, 'find');
     expect(spy).not.toHaveBeenCalled();
     expect(wrapper.find('Pager')).toHaveLength(2);
-    const promise = Promise.resolve(instance.pageChange(2));
+    const promise = Promise.resolve(instance.handlePageChange(2));
 
     return promise.then(() => {
       wrapper.update();
@@ -92,8 +93,8 @@ describe('<Table /> Component', () => {
     const template = 'Showing {start} to {end} of {total}';
     const wrapper = mount(
       <Component service={service} countTemplate={template}>
-        <Column title="ID" dataSource="id" />
-        <Column title="Text" dataSource="text" />
+        <Column title='ID' dataSource='id' />
+        <Column title='Text' dataSource='text' />
       </Component>
     );
     await wrapper.instance().find();

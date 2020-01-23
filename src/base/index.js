@@ -55,7 +55,7 @@ class FeathersReact extends Component {
     }
   };
 
-  pageChange = page => {
+  handlePageChange = page => {
     const $skip = (page - 1) * this.state.pagination.pageSize;
     this.setState({ $skip });
   };
@@ -87,7 +87,7 @@ class FeathersReact extends Component {
       data.splice(shouldRemove.index, 1);
 
       if (!data.length && pagination && pagination.current > 1) {
-        return this.pageChange(pagination.current - 1);
+        return this.handlePageChange(pagination.current - 1);
       }
     }
 

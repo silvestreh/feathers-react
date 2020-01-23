@@ -25,49 +25,52 @@ class Table extends FeathersReact {
     } = this.props;
 
     return (
-      <div className="fr-table-wrapper">
-        <table className="fr-table">
-          <thead className="fr-table-head">
+      <div className='fr-table-wrapper'>
+        <table className='fr-table'>
+          <thead className='fr-table-head'>
             <tr>
               {Children.map(children, (child, i) => (
-                <th key={i}
-                  className="fr-table-content"
-                  width={child.props.width}>
-                  <span className="fr-table-column-title">
+                <th
+                  key={i}
+                  className='fr-table-content'
+                  width={child.props.width}
+                >
+                  <span className='fr-table-column-title'>
                     {child.props.title}
                   </span>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="fr-table-body">
+          <tbody className='fr-table-body'>
             {!data.length &&
               <tr>
-                <td className="fr-table-no-data" colSpan={Children.count(children)}>
+                <td className='fr-table-no-data' colSpan={Children.count(children)}>
                   <img src={inbox} alt={languages[language].no_data} />
                   {languages[language].no_data}
                 </td>
-              </tr>
-            }
+              </tr>}
             {data.map((row, index) => (
-              <tr key={row[keyProp]}
+              <tr
+                key={row[keyProp]}
                 onClick={() => onRowClick(row, index)}
                 className={`
                   fr-table-row
                   ${typeof onRowClick === 'function' ? 'fr-table-row-clickable' : ''}
-                `}>
+                `}
+              >
                 {Children.map(children, child => (
                   cloneElement(child, { row, key: keyProp })
                 ))}
               </tr>
             ))}
           </tbody>
-          <tfoot className="fr-table-footer">
+          <tfoot className='fr-table-footer'>
             <tr>
-              <td className="fr-table-content" colSpan={Children.count(children)}>
+              <td className='fr-table-content' colSpan={Children.count(children)}>
                 {usePagination && !!data.length &&
                   <Pagination
-                    onChange={this.pageChange}
+                    onChange={this.handlePageChange}
                     language={language}
                     showTotal={(total, range) => {
                       if (!countTemplate) return false;
@@ -77,13 +80,13 @@ class Table extends FeathersReact {
                         .replace('{total}', total);
                     }}
                     {...paginationProps}
-                    {...pagination} />
-                }
+                    {...pagination}
+                  />}
               </td>
             </tr>
           </tfoot>
         </table>
-        {isLoading && <div className="fr-table-loading" />}
+        {isLoading && <div className='fr-table-loading' />}
       </div>
     );
   }
