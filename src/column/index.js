@@ -18,7 +18,7 @@ Column.displayName = 'Column';
 Column.propTypes = {
   dataSource: PropTypes.string.isRequired,
   render: PropTypes.func,
-  row: PropTypes.object.isRequired,
+  row: PropTypes.object,
   title: PropTypes.string,
   width: PropTypes.number
 };
