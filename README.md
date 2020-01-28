@@ -92,18 +92,20 @@ The `<Container />` component is a generic wrapper that you can use to present d
 import React from 'react';
 import { Container } from 'feathers-react';
 import 'feathers-react/style.css';
-import SomeComponent from './some-component';
+import Message from './message';
 
 export default ({ client }) => {
-  const service = client.service('some-service');
-  const query = { $sort: { name: 1 } };
+  const service = client.service('messages');
+  const query = { $sort: { author: 1 } };
 
   return (
     <Container
       service={service}
       query={query}
-      renderItem={(data, index) => (
-        <SomeComponent key={data.id} data={data} />
+      itemsWrapper={<div className="messages-wrapper" />}
+      separator={message => <h3>Messages by {message.author}</h3>}
+      renderItem={message => (
+        <Message key={message.id} message={message} />
       )} />
   );
 };
