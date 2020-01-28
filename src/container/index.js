@@ -39,8 +39,9 @@ class FeathersContainer extends Base {
 
     if (!data.length) return emptyState || null;
 
+    /* istanbul ignore next */
     if ((separator && !query.$sort) || (separator && !itemsWrapper)) {
-      console.warn(`[feathers-react]: 'separator' prop requires both: a '$sort' property in your query, and the 'itemsWrapper' prop to be defined`);
+      console.warn('[feathers-react]: \'separator\' prop requires both: a \'$sort\' property in your query, and the \'itemsWrapper\' prop to be defined');
       return null;
     }
 
