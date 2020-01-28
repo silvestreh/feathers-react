@@ -5,15 +5,16 @@ import times from 'lodash.times';
 const fakeId = () => Math.random().toString(36).substring(7);
 const fakeMsg = id => ({
   id: typeof id === 'number' ? fakeId() : id,
-  text: faker.lorem.sentence()
+  text: faker.lorem.sentence(),
+  author: 'Silvestre'
 });
 
 const feathersClient = () => {
   const app = feathers();
   const data = [
     ...times(8, fakeMsg),
-    { id: 'id-to-remove', text: 'Removed message' },
-    { id: 'id-to-patch', text: 'Removed message' }
+    { id: 'id-to-remove', text: 'Removed message', author: 'Feathers' },
+    { id: 'id-to-patch', text: 'Removed message', author: 'Feathers' }
   ];
 
   app.use('/messages', {

@@ -59,6 +59,23 @@ describe('<Container /> Component', () => {
     expect(itemsWrapper.props().children).toHaveLength(10);
   });
 
+  it('can group results based on a $sort query', async () => {
+    const wrapper = mount(
+      <Component
+        itemsWrapper={<div className='wrapper-div' />}
+        service={service}
+        query={{ $sort: { author: 1 } }}
+        separator={record => <h1>{record.author}</h1>}
+        renderItem={(record, i) => <p key={i}>{record.text}</p>}
+      />
+    );
+    await wrapper.instance().find();
+    wrapper.update();
+    expect(wrapper.find('h1')).toHaveLength(2);
+    expect(wrapper.find({ children: 'Silvestre' })).toHaveLength(1);
+    expect(wrapper.find({ children: 'Feathers' })).toHaveLength(1);
+  });
+
   it('removes listeners on unmount', () => {
     const spy = jest.spyOn(instance.props.service, 'removeListener');
     instance.componentWillUnmount();
