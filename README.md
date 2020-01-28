@@ -79,6 +79,7 @@ The `<Container />` component is a generic wrapper that you can use to present d
 | `keyProp` | The result's property to use as `key`. | No | `'id'` |
 | `renderItem` | A render function that can return a React component. The function takes two arguments: the row's data and its `index`. | Yes | `(row, index) => <SomeComponent key={row.id} data={row} />` |
 | `itemsWrapper` | An HTMLElement or React component that will wrap rendered children. | No | `undefined` |
+| `separator` | A render function to use as a separator. It takes one argument: the current result being iterated. It requires both: `itemsWrapper` and `query.$sort` to be defined. | No | `undefined` |
 | `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
 | `usePagination` | Determines wether to use the `<Pagination />` component. | No | `false` |
