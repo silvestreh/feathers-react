@@ -68,7 +68,7 @@ class Table extends FeathersReact {
           </tbody>
           <tfoot className='fr-table-footer'>
             <tr>
-              <td className='fr-table-content' colSpan={Children.count(children)}>
+              <td className='fr-table-content' colSpan={Children.toArray(children).filter(child => child !== null).length}>
                 {usePagination && !!data.length &&
                   <Pagination
                     onChange={this.handlePageChange}
