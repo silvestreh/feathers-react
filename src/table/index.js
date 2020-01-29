@@ -30,7 +30,7 @@ class Table extends FeathersReact {
           <thead className='fr-table-head'>
             <tr>
               {Children.map(children, (child, i) => (
-                <th
+                child && <th
                   key={i}
                   className='fr-table-content'
                   width={child.props.width}
@@ -60,7 +60,7 @@ class Table extends FeathersReact {
                 `}
               >
                 {Children.map(children, child => (
-                  cloneElement(child, { row, key: keyProp })
+                  child && cloneElement(child, { row, key: keyProp })
                 ))}
               </tr>
             ))}
