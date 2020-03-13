@@ -14,17 +14,25 @@ const feathersClient = () => {
   const data = [
     ...times(8, fakeMsg),
     { id: 'id-to-remove', text: 'Removed message', author: 'Feathers' },
-    { id: 'id-to-patch', text: 'Removed message', author: 'Feathers' }
+    { id: 'id-to-patch', text: 'Patched message', author: 'Feathers' }
   ];
 
   app.use('/messages', {
     create: async payload => ({ id: fakeId(), ...payload }),
-    find: async () => ({
-      data,
-      limit: 10,
-      skip: 0,
-      total: 15
-    }),
+    find: async params => {
+      const { query } = params;
+
+      return {
+        data: query.$skip && query.$limit ? [{
+          id: fakeId(),
+          text: 'Something random',
+          author: 'Feathers'
+        }] : data,
+        limit: query.$limit || 10,
+        skip: query.$skip || 0,
+        total: 15
+      };
+    },
     patch: async (id, payload) => ({ id, ...payload }),
     remove: async id => fakeMsg(id),
     update: async (id, payload) => ({ id, ...payload })
