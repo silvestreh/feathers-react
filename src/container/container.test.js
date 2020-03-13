@@ -11,6 +11,7 @@ describe('<Container /> Component', () => {
     service = app.service('messages');
     wrapper = mount(
       <Component
+        hidePaginationOnSinglePage
         usePagination
         service={service}
         query={query}
@@ -74,11 +75,5 @@ describe('<Container /> Component', () => {
     expect(wrapper.find('h1')).toHaveLength(2);
     expect(wrapper.find({ children: 'Silvestre' })).toHaveLength(1);
     expect(wrapper.find({ children: 'Feathers' })).toHaveLength(1);
-  });
-
-  it('removes listeners on unmount', () => {
-    const spy = jest.spyOn(instance.props.service, 'removeListener');
-    instance.componentWillUnmount();
-    expect(spy).toHaveBeenCalled();
   });
 });

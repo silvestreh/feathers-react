@@ -45,28 +45,9 @@ describe('<Table /> Component', () => {
     done();
   });
 
-  it('handles real-time events', async done => {
-    // Document removal
-    expect(wrapper.state().data.findIndex(m => m.id === 'id-to-remove')).toBeGreaterThan(-1);
-    await service.remove('id-to-remove');
-    wrapper.update();
-    expect(wrapper.state().data.findIndex(message => message.id === 'id-to-remove')).toBe(-1);
-
-    // Document patching
-    await service.patch('id-to-patch', { text: 'feathers-react rocks!' });
-    wrapper.update();
-    expect(wrapper.find({ children: 'feathers-react rocks!' })).toHaveLength(1);
-
-    // Document creation
-    await service.create({ text: 'real-time woo!' });
-    wrapper.update();
-    expect(wrapper.find({ children: 'real-time woo!' })).toHaveLength(1);
-
-    done();
-  });
-
   it('can click a row', () => {
     const row = wrapper.find('tbody tr').first();
+
     expect(wrapper.find('.fr-table-row-clickable')).toHaveLength(10);
     expect(onRowClick).not.toHaveBeenCalled();
     row.simulate('click');
@@ -98,11 +79,5 @@ describe('<Table /> Component', () => {
     wrapper.update();
     expect(wrapper.find('.rc-pagination-total-text').text()).toBe('Showing 1 to 10 of 15');
     done();
-  });
-
-  it('removes listeners on unmount', () => {
-    const spy = jest.spyOn(instance.props.service, 'removeListener');
-    instance.componentWillUnmount();
-    expect(spy).toHaveBeenCalled();
   });
 });
