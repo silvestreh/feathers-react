@@ -48,7 +48,7 @@ describe('<Base /> Component', () => {
     done();
   });
 
-  it('a patched record not matching the query anymore is dropped', async () => {
+  it('a patched record not matching the query anymore is dropped (and vice versa)', async () => {
     const query = { author: 'Silvestre' };
     const wrapper = mount(
       <Component service={service} query={query} />
@@ -59,6 +59,9 @@ describe('<Base /> Component', () => {
     await service.patch(firstMessage.id, { author: 'Someone Else' });
     wrapper.update();
     expect(findById(wrapper.state().data, firstMessage.id)).toBeFalsy();
+    await service.patch(firstMessage.id, { author: 'Silvestre' });
+    wrapper.update();
+    expect(findById(wrapper.state().data, firstMessage.id)).toBeTruthy();
   });
 
   it('can go wrong', async () => {
