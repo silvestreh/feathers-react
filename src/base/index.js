@@ -103,6 +103,7 @@ class FeathersReact extends Component {
     if (shouldRemove.isInData) {
       data.splice(shouldRemove.index, 1);
 
+      /* istanbul ignore next */
       if (!data.length && pagination && pagination.current > 1) {
         return this.handlePageChange(pagination.current - 1);
       }
