@@ -47,13 +47,10 @@ describe('<Table /> Component', () => {
 
   it('handles real-time events', async done => {
     // Document removal
-    // Because the fake feathers client used for testing always returns
-    // the same results and we're fetching the first record on the next
-    // page after removing an item, this test will fail.
-    expect(wrapper.find({ children: 'Removed message' })).toHaveLength(2);
+    expect(wrapper.state().data.findIndex(m => m.id === 'id-to-remove')).toBeGreaterThan(-1);
     await service.remove('id-to-remove');
     wrapper.update();
-    // expect(wrapper.find({ children: 'Removed message' })).toHaveLength(0);
+    expect(wrapper.state().data.findIndex(message => message.id === 'id-to-remove')).toBe(-1);
 
     // Document patching
     await service.patch('id-to-patch', { text: 'feathers-react rocks!' });
