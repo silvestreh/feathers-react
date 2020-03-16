@@ -19,7 +19,7 @@ class Table extends FeathersReact {
       keyProp,
       language,
       usePagination = true,
-      onRowClick = () => {},
+      onRowClick,
       countTemplate,
       paginationProps
     } = this.props;
@@ -55,10 +55,7 @@ class Table extends FeathersReact {
               <tr
                 key={row[keyProp]}
                 onClick={() => onRowClick(row, index)}
-                className={`
-                  fr-table-row
-                  ${typeof onRowClick === 'function' ? 'fr-table-row-clickable' : ''}
-                `}
+                className='fr-table-row fr-table-row-clickable'
               >
                 {Children.map(children, child => (
                   child && cloneElement(child, { row, key: keyProp })

@@ -23,10 +23,10 @@ class FeathersReact extends Component {
     query: {}
   };
 
-  state = { data: [], isLoading: false, pagination: null, $skip: 0 };
+  state = { error: null, data: [], isLoading: false, pagination: null, $skip: 0 };
 
   find = async () => {
-    this.setState({ isLoading: true });
+    this.setState({ error: null, isLoading: true });
 
     try {
       const { query, service } = this.props;
@@ -49,9 +49,9 @@ class FeathersReact extends Component {
         isLoading: false,
         pagination
       });
-    } catch (e) {
-      this.setState({ isLoading: false });
-      throw e;
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+      throw error;
     }
   };
 
@@ -67,13 +67,30 @@ class FeathersReact extends Component {
     return { index, isInData: index >= 0 };
   };
 
+  recordMatchesQuery = record => {
+    const { query } = this.props;
+    const keys = Object.keys(query)
+      .filter(key => (
+        key.includes('$') && !allowedOperators.includes(key)
+      ));
+    const filter = sift(omit(query, ...keys));
+
+    return filter(record);
+  };
+
   handlePatch = updated => {
     const { data } = this.state;
     const shouldUpdate = this.isRecordInData(updated);
 
     if (shouldUpdate.isInData) {
-      data[shouldUpdate.index] = updated;
-      this.setState({ data });
+      if (this.recordMatchesQuery(updated)) {
+        data[shouldUpdate.index] = updated;
+        this.setState({ data });
+      } else {
+        this.handleRemove(updated);
+      }
+    } else {
+      this.handleCreate(updated);
     }
   };
 
@@ -86,6 +103,7 @@ class FeathersReact extends Component {
     if (shouldRemove.isInData) {
       data.splice(shouldRemove.index, 1);
 
+      /* istanbul ignore next */
       if (!data.length && pagination && pagination.current > 1) {
         return this.handlePageChange(pagination.current - 1);
       }
@@ -113,17 +131,11 @@ class FeathersReact extends Component {
   };
 
   handleCreate = created => {
-    const { query } = this.props;
     const { data, pagination } = this.state;
     const shouldUpdate = this.isRecordInData(created);
-    const keys = Object.keys(query)
-      .filter(key => (
-        key.includes('$') && !allowedOperators.includes(key)
-      ));
-    const filter = sift(omit(query, ...keys));
     let p = null;
 
-    if (filter(created) && !shouldUpdate.isInData) {
+    if (this.recordMatchesQuery(created) && !shouldUpdate.isInData) {
       data.unshift(created);
 
       if (data.length > pagination.pageSize) {
@@ -169,6 +181,10 @@ class FeathersReact extends Component {
     service.removeListener('updated', this.handlePatch);
     service.removeListener('removed', this.handleRemove);
     service.removeListener('created', this.handleCreate);
+  }
+
+  render () {
+    return null;
   }
 }
 
