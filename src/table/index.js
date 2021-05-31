@@ -50,7 +50,7 @@ class Table extends FeathersReact {
                     <button
                       className='fr-table-column-sorting-button'
                       onClick={sortable && child.props.dataSource ? this.handleSortClick(child.props) : undefined}
-                      style={{ cursor: sortable ? 'pointer' : 'default' }}
+                      style={{ cursor: sortable && child.props.dataSource ? 'pointer' : 'default' }}
                     >
                       <span className='fr-table-column-title'>
                         {child.props.title}
