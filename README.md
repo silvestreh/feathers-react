@@ -22,6 +22,7 @@ npm install --save feathers-react
 | `query` | A [Feathers query](https://docs.feathersjs.com/api/databases/querying.html) object to run against the specified `service`. | No | `{}` |
 | `keyProp` | The result's property to use as `key`. | No | `'id'` |
 | `onRowClick` | Click event handler for a table row. The function takes two arguments: the row's data and its `index`. | No | `(row, index) => {}` |
+| `sortable` | A `Boolean` that determines wether a header can be clicked to sort results | No | `undefined` |
 | `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
 | `usePagination` | Determines wether to use the `<Pagination />` component. | No | `true` |
@@ -33,7 +34,7 @@ npm install --save feathers-react
 
 | Name | Description | Required | Default value |
 |------|-------------|----------|---------------|
-| `dataSource` | The result's property to extract data from. | Yes | `undefined` |
+| `dataSource` | The result's property to extract data from. | Only when `render` is not defined | `undefined` |
 | `render` | A render function that takes two arguments: the data for the column and the row's data. For example, `imageUrl => <img src={imageUrl} />` would render an image in the table cell. | No | `undefined` |
 | `title` | A string to use as the header for the column. | No | `undefined` |
 | `width` | The column's visual width, in pixels. | No | `undefined` |
