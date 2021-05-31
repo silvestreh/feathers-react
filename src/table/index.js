@@ -12,8 +12,18 @@ class Table extends FeathersReact {
     usePagination: PropTypes.bool
   };
 
+  handleSortClick = column => () => {
+    const { $sort } = this.state;
+
+    if (typeof $sort[column.dataSource] === 'number') {
+      this.setState({ $sort: { [column.dataSource]: $sort[column.dataSource] > 0 ? -1 : 1 } }, this.find);
+    } else {
+      this.setState({ $sort: { [column.dataSource]: 1 } }, this.find);
+    }
+  };
+
   render () {
-    const { data, isLoading, pagination } = this.state;
+    const { data, isLoading, pagination, $sort } = this.state;
     const {
       children,
       keyProp,
@@ -21,7 +31,8 @@ class Table extends FeathersReact {
       usePagination = true,
       onRowClick,
       countTemplate,
-      paginationProps
+      paginationProps,
+      sortable
     } = this.props;
 
     return (
@@ -36,9 +47,24 @@ class Table extends FeathersReact {
                     className='fr-table-content'
                     width={child.props.width}
                   >
-                    <span className='fr-table-column-title'>
-                      {child.props.title}
-                    </span>
+                    <button
+                      className='fr-table-column-sorting-button'
+                      onClick={sortable ? this.handleSortClick(child.props) : undefined}
+                      style={{ cursor: sortable ? 'pointer' : 'default' }}>
+                      <span className='fr-table-column-title'>
+                        {child.props.title}
+                      </span>
+                      {$sort && $sort[child.props.dataSource] &&
+                        <span
+                          className='fr-table-column-sorting-indicator' style={{
+                            transform: $sort[child.props.dataSource] > 0
+                              ? 'none'
+                              : 'rotate(180deg)'
+                          }}
+                        >
+                          <span>▴</span>
+                        </span>}
+                    </button>
                   </th>
               ))}
             </tr>

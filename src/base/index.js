@@ -23,15 +23,22 @@ class FeathersReact extends Component {
     query: {}
   };
 
-  state = { error: null, data: [], isLoading: false, pagination: null, $skip: 0 };
+  state = {
+    error: null,
+    data: [],
+    isLoading: false,
+    pagination: null,
+    $skip: 0,
+    $sort: (this.props.query && this.props.query.$sort) || null
+  };
 
   find = async () => {
     this.setState({ error: null, isLoading: true });
 
     try {
       const { query, service } = this.props;
-      const { $skip } = this.state;
-      const q = { ...query, $skip };
+      const { $skip, $sort } = this.state;
+      const q = { ...query, $skip, $sort };
       const response = await service.find({ query: q });
       const pagination = {
         current: response.skip / response.limit + 1,

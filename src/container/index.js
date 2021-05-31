@@ -34,8 +34,9 @@ class FeathersContainer extends Base {
     } = this.props;
     const sections = [];
     const { data, pagination } = this.state;
-    const shouldShowPagination = hidePaginationOnSinglePage &&
-      pagination ? data.length >= pagination.pageSize : !!data.length;
+    const shouldShowPagination = hidePaginationOnSinglePage && pagination
+      ? data.length >= pagination.pageSize
+      : !!data.length;
 
     if (!data.length) return emptyState || null;
 

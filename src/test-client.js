@@ -23,13 +23,15 @@ const feathersClient = () => {
       const { query } = params;
 
       return {
-        data: query.$skip && query.$limit ? [{
-          id: fakeId(),
-          text: 'Something random',
-          author: 'Feathers'
-        }] : query.author
-          ? data.filter(({ author }) => author === query.author)
-          : data,
+        data: query.$skip && query.$limit
+          ? [{
+              id: fakeId(),
+              text: 'Something random',
+              author: 'Feathers'
+            }]
+          : query.author
+            ? data.filter(({ author }) => author === query.author)
+            : data,
         limit: query.$limit || 10,
         skip: query.$skip || 0,
         total: 15

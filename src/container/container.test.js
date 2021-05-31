@@ -21,15 +21,14 @@ describe('<Container /> Component', () => {
     instance = wrapper.instance();
   });
 
-  it('renders data using a render function', async done => {
+  it('renders data using a render function', async () => {
     expect(wrapper.find('p')).toHaveLength(0);
     await instance.find();
     wrapper.update();
     expect(wrapper.find('p')).toHaveLength(10);
-    done();
   });
 
-  it('counts documents in the response', async done => {
+  it('counts documents in the response', async () => {
     const template = 'Showing {start} to {end} of {total}';
     const wrapper = mount(
       <Component
@@ -42,7 +41,6 @@ describe('<Container /> Component', () => {
     await wrapper.instance().find();
     wrapper.update();
     expect(wrapper.find('.rc-pagination-total-text').text()).toBe('Showing 1 to 10 of 15');
-    done();
   });
 
   it('supports having a wrapper', async () => {
