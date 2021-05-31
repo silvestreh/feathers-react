@@ -16,7 +16,14 @@ const Column = ({ row, dataSource, render }) => {
 Column.displayName = 'Column';
 
 Column.propTypes = {
-  dataSource: PropTypes.string.isRequired,
+  dataSource: function (props, propName, componentName) {
+    if (typeof props.render !== 'function' && typeof props[propName] !== 'string') {
+      return new Error(
+        'Invalid ' + propName + ' supplied to ' + componentName +
+        '. ' + propName + ' is required, unless a render prop is supplied.'
+      );
+    }
+  },
   render: PropTypes.func,
   row: PropTypes.object,
   title: PropTypes.string,
