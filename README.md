@@ -23,6 +23,7 @@ npm install --save feathers-react
 | `keyProp` | The result's property to use as `key`. | No | `'id'` |
 | `onRowClick` | Click event handler for a table row. The function takes two arguments: the row's data and its `index`. | No | `(row, index) => {}` |
 | `sortable` | A `Boolean` that determines wether a header can be clicked to sort results | No | `undefined` |
+| `onDataChange` | A callback `Function` that is invoked after the table's data changed | No | `undefined` |
 | `countTemplate` | A string to use as template for showing items count. For example, `'Showing {start} to {end} of {total}'` would render something like `Showing 1 to 10 of 25`. | No | `undefined` |
 | `language` | The locale name to render translated text. Supported locales are `['fr_FR', 'en_US', 'es_ES']`. | No | `'en_US'` |
 | `usePagination` | Determines wether to use the `<Pagination />` component. | No | `true` |
