@@ -26,7 +26,7 @@ describe('<Base /> Component', () => {
       });
   });
 
-  it('handles real-time events', async done => {
+  it('handles real-time events', async () => {
     // Document removal
     expect(findById(wrapper.state().data, 'id-to-remove')).toBeTruthy();
     await service.remove('id-to-remove');
@@ -44,8 +44,6 @@ describe('<Base /> Component', () => {
     await service.create({ text: 'real-time woo!' });
     wrapper.update();
     expect(findByText(wrapper.state().data, 'real-time woo!').text).toBeTruthy();
-
-    done();
   });
 
   it('a patched record not matching the query anymore is dropped (and vice versa)', async () => {

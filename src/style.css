@@ -76,8 +76,31 @@
   font-weight: 400;
 }
 
+.fr-table-column-sorting-button {
+  appearance: none;
+  background: none;
+  border: none;
+}
+
 .fr-table-column-title {
   font-size: .85em;
+}
+
+.fr-table-column-sorting-indicator {
+  align-items: center;
+  display: inline-flex;
+  font-size: 1.25em;
+  height: 1em;
+  justify-content: center;
+  line-height: 1;
+  transition: transform 250ms;
+  width: 1em;
+}
+
+.fr-table-column-sorting-indicator span {
+  display: inline-block;
+  margin-top: -.25em;
+  transform: scaleX(1.5);
 }
 
 .fr-table-content {

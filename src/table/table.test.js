@@ -13,9 +13,10 @@ describe('<Table /> Component', () => {
     service = app.service('messages');
     wrapper = mount(
       <Component
-        service={service}
-        query={query}
         onRowClick={onRowClick}
+        query={query}
+        service={service}
+        sortable
       >
         <Column title='ID' dataSource='id' />
         <Column title='Text' dataSource='text' />
@@ -24,15 +25,14 @@ describe('<Table /> Component', () => {
     instance = wrapper.instance();
   });
 
-  it('calls service find', async done => {
+  it('calls service find', async () => {
     expect(wrapper.find('Column')).toHaveLength(0);
     await instance.find();
     wrapper.update();
     expect(wrapper.find('Column')).toHaveLength(20);
-    done();
   });
 
-  it('works with an unpagianted response', async done => {
+  it('works with an unpagianted response', async () => {
     const wrapper = mount(
       <Component service={app.service('not-paginated')}>
         <Column title='ID' dataSource='id' />
@@ -42,7 +42,6 @@ describe('<Table /> Component', () => {
     await wrapper.instance().find();
     wrapper.update();
     expect(wrapper.find('Column')).toHaveLength(20);
-    done();
   });
 
   it('can click a row', () => {
@@ -67,7 +66,7 @@ describe('<Table /> Component', () => {
     });
   });
 
-  it('counts documents in the response', async done => {
+  it('counts documents in the response', async () => {
     const template = 'Showing {start} to {end} of {total}';
     const wrapper = mount(
       <Component service={service} countTemplate={template}>
@@ -78,6 +77,24 @@ describe('<Table /> Component', () => {
     await wrapper.instance().find();
     wrapper.update();
     expect(wrapper.find('.rc-pagination-total-text').text()).toBe('Showing 1 to 10 of 15');
-    done();
+  });
+
+  it('can change sorting', () => {
+    const sortingColumn = wrapper.find('th button').last();
+    const notSortingColumn = wrapper.find('th button').first();
+
+    // Text toggling ascending/descending order
+    expect(instance.state.$sort).toMatchObject({ text: 1 });
+    sortingColumn.simulate('click');
+    wrapper.update();
+    expect(instance.state.$sort).toMatchObject({ text: -1 });
+    sortingColumn.simulate('click');
+    wrapper.update();
+    expect(instance.state.$sort).toMatchObject({ text: 1 });
+
+    // Test sorting by other column
+    notSortingColumn.simulate('click');
+    wrapper.update();
+    expect(instance.state.$sort).toMatchObject({ id: 1 });
   });
 });
