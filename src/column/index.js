@@ -17,6 +17,7 @@ Column.displayName = 'Column';
 
 Column.propTypes = {
   dataSource: function (props, propName, componentName) {
+    /* istanbul ignore next */
     if (typeof props.render !== 'function' && typeof props[propName] !== 'string') {
       return new Error(
         'Invalid ' + propName + ' supplied to ' + componentName +

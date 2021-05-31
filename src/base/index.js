@@ -13,6 +13,7 @@ class FeathersReact extends Component {
       'es_ES',
       'fr_FR'
     ]),
+    onDataChange: PropTypes.func,
     query: PropTypes.object,
     service: PropTypes.object.isRequired
   };
@@ -41,10 +42,14 @@ class FeathersReact extends Component {
       const q = { ...query, $skip, $sort };
       const response = await service.find({ query: q });
       const pagination = {
-        current: response.skip / response.limit + 1,
-        pageSize: response.limit,
-        total: response.total
+        current: response?.skip / response?.limit + 1,
+        pageSize: response?.limit,
+        total: response?.total
       };
+
+      if (typeof this.props.onDataChange === 'function') {
+        this.props.onDataChange(response);
+      }
 
       /* istanbul ignore next */
       if (Array.isArray(response)) {
@@ -52,7 +57,7 @@ class FeathersReact extends Component {
       }
 
       return this.setState({
-        data: response.data,
+        data: response?.data,
         isLoading: false,
         pagination
       });

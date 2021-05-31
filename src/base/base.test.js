@@ -72,4 +72,11 @@ describe('<Base /> Component', () => {
     instance.componentWillUnmount();
     expect(spy).toHaveBeenCalled();
   });
+
+  it('calls a callback after fetching data', async () => {
+    const spy = jest.fn();
+    const wrapper = mount(<Component onDataChange={spy} service={service} />);
+    await wrapper.instance().find();
+    expect(spy).toHaveBeenCalled();
+  });
 });
