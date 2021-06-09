@@ -12,6 +12,14 @@ class Table extends FeathersReact {
     usePagination: PropTypes.bool
   };
 
+  handleRowClick = (row, index) => () => {
+    const { onRowClick } = this.props;
+
+    if (typeof onRowClick === 'function') {
+      onRowClick(row, index);
+    }
+  };
+
   handleSortClick = column => () => {
     const { $sort } = this.state;
 
@@ -22,6 +30,17 @@ class Table extends FeathersReact {
     }
   };
 
+  getRowClassNames = () => {
+    const { onRowClick } = this.props;
+    let classNames = 'fr-table-row';
+
+    if (typeof onRowClick === 'function') {
+      classNames = `${classNames} fr-table-row-clickable`;
+    }
+
+    return classNames;
+  };
+
   render () {
     const { data, isLoading, pagination, $sort } = this.state;
     const {
@@ -29,7 +48,6 @@ class Table extends FeathersReact {
       keyProp,
       language,
       usePagination = true,
-      onRowClick,
       countTemplate,
       paginationProps,
       sortable
@@ -81,8 +99,8 @@ class Table extends FeathersReact {
             {data.map((row, index) => (
               <tr
                 key={row[keyProp]}
-                onClick={() => onRowClick(row, index)}
-                className='fr-table-row fr-table-row-clickable'
+                onClick={this.handleRowClick(row, index)}
+                className={this.getRowClassNames()}
               >
                 {Children.map(children, child => (
                   child && cloneElement(child, { row, key: keyProp })
