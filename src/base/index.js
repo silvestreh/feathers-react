@@ -30,7 +30,7 @@ class FeathersReact extends Component {
     isLoading: false,
     pagination: null,
     $skip: 0,
-    $sort: (this.props.query && this.props.query.$sort) || null
+    $sort: (this.props.query && this.props.query.$sort) || {}
   };
 
   find = async () => {
