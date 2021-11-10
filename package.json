@@ -22,7 +22,7 @@
     "release:patch": "npm test && npm version patch && git push origin --tags && npm publish",
     "release:minor": "npm test && npm version minor && git push origin --tags && npm publish",
     "release:major": "npm test && npm version major && git push origin --tags && npm publish",
-    "lint": "semistandard --fix"
+    "lint": "eslint src/ --fix"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -35,9 +35,9 @@
     ]
   },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "prop-types": ">=15",
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "semistandard": {
     "parser": "babel-eslint",
@@ -48,38 +48,36 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-function-bind": "^7.12.13",
-    "@babel/preset-react": "^7.13.13",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-function-bind": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
     "@feathersjs/client": "^4.5.11",
     "@svgr/rollup": "^5.5.0",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "eslint": "^7.27.0",
-    "eslint-config-semistandard": "^15.0.1",
-    "eslint-config-semistandard-react": "^4.2.0",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint": "^7.32.0",
+    "eslint-config-semistandard": "^16.0.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-semistandard-react": "^4.1.0",
-    "eslint-plugin-standard": "^4.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "eslint-plugin-react": "^7.27.0",
     "faker": "^5.5.3",
     "lodash.times": "^4.3.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": ">=16",
+    "react-dom": ">=16",
     "react-scripts": "^4.0.3",
-    "rollup": "^2.50.5",
+    "rollup": "^2.59.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-url": "^3.0.1",
-    "semistandard": "^16.0.0"
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-url": "^3.0.1"
   },
   "files": [
     "dist"
@@ -87,7 +85,7 @@
   "dependencies": {
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
-    "rc-pagination": "^3.1.6",
-    "sift": "^13.5.4"
+    "rc-pagination": "^3.1.9",
+    "sift": "^15.0.0"
   }
 }
