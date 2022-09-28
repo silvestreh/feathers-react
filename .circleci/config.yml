@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/feathers-react
     docker:
-      - image: cimg/base:2021.04
+      - image: circleci/node:16.13.1
     steps:
       - checkout
       - run:
