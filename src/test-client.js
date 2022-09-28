@@ -1,5 +1,5 @@
 import feathers from '@feathersjs/client';
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import times from 'lodash.times';
 
 const fakeId = () => Math.random().toString(36).substring(7);
