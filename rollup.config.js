@@ -6,6 +6,8 @@ import resolve from 'rollup-plugin-node-resolve';
 import url from 'rollup-plugin-url';
 import svgr from '@svgr/rollup';
 import copy from 'rollup-plugin-copy';
+import { terser } from 'rollup-plugin-terser';
+import filesize from 'rollup-plugin-filesize';
 
 import pkg from './package.json';
 
@@ -15,12 +17,14 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named'
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named'
     }
   ],
   plugins: [
@@ -33,9 +37,12 @@ export default {
     babel({ exclude: 'node_modules/**' }),
     resolve(),
     commonjs(),
+    terser(),
+    filesize(),
     copy({
       targets: [
-        { src: 'src/style.css', dest: 'dist/' }
+        { src: 'src/style.css', dest: 'dist/' },
+        { src: 'src/index.d.ts', dest: 'dist/' }
       ]
     })
   ]
